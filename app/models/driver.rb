@@ -11,5 +11,9 @@ class Driver < ApplicationRecord
   attribute :last_name, :string
 
   scope :not_assigned, -> { select { |d| d.vehicle.nil? } }
+  scope :assigned, -> { select { |d| !d.vehicle.nil? } }
   scope :not_assigned_by_organization, -> (organization) {  not_assigned.select { |d| d.organization.id == organization } }
+
+  def full_name = "#{first_name} #{last_name}"
+  def assigned_vehicle = "#{full_name} / #{vehicle.plate}"
 end

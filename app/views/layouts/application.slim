@@ -12,10 +12,18 @@ html
     = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
 
   body.container
-    .row
-      .col-12
-        - if notice
-          p.alert.alert-success.mt-4 = notice 
-        - if alert 
-          p.alert.alert-danger.mt-4 = alert
-        = yield
+    header
+      .mt-2 
+        h2.bold Welcome to the route scheduler
+        - if user_signed_in?
+          span #{current_user.email} is in sesion
+          / = form_with(url: destroy_user_session_path, method: :delete, data: { turbo: false})
+          /   = submit_tag 'Log out'
+    main.
+      .row
+        .col-12.mt-2
+          - if notice
+            p.alert.alert-success.mx-1 = notice 
+          - if alert 
+            p.alert.alert-danger.mx-1 = alert
+          = yield
