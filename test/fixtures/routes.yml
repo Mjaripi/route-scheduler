@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uuid: MyString
+  starts_at: 2022-11-08 18:08:43
+  ends_at: 2022-11-08 18:08:43
+  travel_time: 1
+  total_stops: 1
+  action: MyString
+
+two:
+  uuid: MyString
+  starts_at: 2022-11-08 18:08:43
+  ends_at: 2022-11-08 18:08:43
+  travel_time: 1
+  total_stops: 1
+  action: MyString
