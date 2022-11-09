@@ -7,7 +7,7 @@ class SchedulerController < ApplicationController
 
   def assign_route
 
-    redirect_to scheduler_index_path
+    redirect_to scheduler_index_path(organization: params[:organization])
   end
 
 

@@ -2,7 +2,7 @@ h3.mt-2 = @organization.name
 .row 
   .col-xl-8
     - unless @all_routes.empty?
-      = form_with(url: assign_route_scheduler_index_path, method: 'post', class: 'form-inline mt-2' , data: { turbo: false}) do |f|
+      = form_with(url: assign_route_scheduler_index_path(organization: @organization.name), method: 'post', class: 'form-inline mt-2' , data: { turbo: false}) do |f|
         table.table.table-striped
           thead.thead-dark
             tr
@@ -29,5 +29,3 @@ h3.mt-2 = @organization.name
     - else 
       p.text-muted No routes found
   .col-xl-4
-br
-= @all_drivers
