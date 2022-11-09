@@ -3,6 +3,7 @@
 This project uses:
 * Ruby 3.1.2
 * Rails 7.0.4
+* Node 14.21.1
 * Postgres 14.3
 
 To run on local

@@ -46,11 +46,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_210843) do
     t.integer "total_stops"
     t.string "action"
     t.bigint "organization_id", null: false
-    t.bigint "driver_id"
     t.bigint "vehicle_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["driver_id"], name: "index_routes_on_driver_id"
     t.index ["organization_id"], name: "index_routes_on_organization_id"
     t.index ["vehicle_id"], name: "index_routes_on_vehicle_id"
   end
@@ -73,14 +71,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_210843) do
     t.string "uuid"
     t.string "plate"
     t.bigint "organization_id", null: false
+    t.bigint "driver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["driver_id"], name: "index_vehicles_on_driver_id"
     t.index ["organization_id"], name: "index_vehicles_on_organization_id"
   end
 
   add_foreign_key "drivers", "organizations"
-  add_foreign_key "routes", "drivers"
   add_foreign_key "routes", "organizations"
   add_foreign_key "routes", "vehicles"
+  add_foreign_key "vehicles", "drivers"
   add_foreign_key "vehicles", "organizations"
 end

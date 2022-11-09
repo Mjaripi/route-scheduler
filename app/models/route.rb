@@ -3,8 +3,7 @@
 # Model for Route
 class Route < ApplicationRecord
   belongs_to :organization
-  belongs_to :driver
-  belongs_to :vehicle
+  belongs_to :vehicle, required: false
 
   attribute :uuid, :string, default: -> { SecureRandom.uuid }
   attribute :starts_at, :datetime
@@ -16,4 +15,6 @@ class Route < ApplicationRecord
   VALID_ACTIONS = %w[llegada recogida].freeze
 
   validates :action, inclusion: { in: VALID_ACTIONS }, on: :create
+
+  scope :by_organization, -> (organization) { select { |r| r.organization.name == organization } }
 end

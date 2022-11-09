@@ -4,5 +4,9 @@ FactoryBot.define do
   factory :vehicle do
     organization_id { Organization.all.sample.id }
     plate { Faker::Vehicle.license_plate }
+
+    trait :assigned do
+      driver_id { Driver.not_assigned.sample.id }
+    end
   end
 end

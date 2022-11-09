@@ -3,8 +3,6 @@
 FactoryBot.define do
   factory :route do
     organization_id { Organization.all.sample.id }
-    driver_id { Driver.all.sample.id }
-    vehicle_id { Vehicle.all.sample.id }
     starts_at {
       DateTime.now > "#{Date.today} 18:00:00 -0300".to_datetime ?
       Faker::Time.between(from: DateTime.now, to: "#{Date.today} 17:45:00 -0300").to_datetime :
@@ -21,5 +19,9 @@ FactoryBot.define do
       travel_time/times + 1
     }
     action { %w[llegada recogida].sample }
+
+    trait :assigned do
+      vehicle_id { Vehicle.assigned.sample.id }
+    end
   end
 end

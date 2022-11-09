@@ -4,6 +4,7 @@ class CreateVehicles < ActiveRecord::Migration[7.0]
       t.string :uuid
       t.string :plate
       t.references :organization, null: false, foreign_key: true
+      t.references :driver, null: true, foreign_key: true
 
       t.timestamps
     end

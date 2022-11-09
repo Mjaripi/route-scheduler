@@ -9,7 +9,6 @@ class CreateRoutes < ActiveRecord::Migration[7.0]
       t.string :action
 
       t.references :organization, null: false, foreign_key: true
-      t.references :driver, foreign_key: true
       t.references :vehicle, foreign_key: true
 
       t.timestamps
