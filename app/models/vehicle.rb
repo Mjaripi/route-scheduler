@@ -12,4 +12,5 @@ class Vehicle < ApplicationRecord
   validates :plate, uniqueness: true
 
   scope :assigned, -> { where.not(driver: nil) }
+  scope :assigned_by_organization, -> (organization) { assigned.select { |v| v.organization.id == organization } }
 end

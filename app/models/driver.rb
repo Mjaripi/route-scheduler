@@ -11,4 +11,5 @@ class Driver < ApplicationRecord
   attribute :last_name, :string
 
   scope :not_assigned, -> { select { |d| d.vehicle.nil? } }
+  scope :not_assigned_by_organization, -> (organization) {  not_assigned.select { |d| d.organization.id == organization } }
 end
