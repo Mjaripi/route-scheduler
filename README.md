@@ -4,13 +4,13 @@ This project uses:
 * Ruby 3.1.2
 * Rails 7.0.4
 * Postgres 14.3
-Make sure you are running the specified 
 
 To run on local
 -----
 Run the following commands on the root of the repo:
 * `bundle install`
 * `yarn install`
+
 Prepare the database
 * `rails db:create`
 * `rails db:migrate`
