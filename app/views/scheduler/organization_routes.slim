@@ -1,0 +1,45 @@
+h3.mt-2 = @organization.name
+- unless @all_routes.empty?
+  .row 
+    .col-xl-8
+      = form_with(url: assign_route_scheduler_index_path(organization: @organization.name), method: 'post', class: 'form-inline mt-2' , data: { turbo: false}) do |f|
+        table.table.table-striped
+          thead.thead-dark
+            tr
+              th Nombre 
+              th Hora 
+              th Tiempo
+              th #rutas
+              th Acción 
+              th Asignación
+          tbody 
+            - @all_routes.each_with_index do |route, index|
+              tr
+                th = "Ruta #{index + 1}"
+                td = route.compact_route_time
+                td = route.compact_travel_time
+                td = route.total_stops
+                td = route.action
+                - if route.vehicle.nil?
+                  td = f.select "#{index}-driver}", @all_drivers
+                - else
+                  td = route.legible_assigned
+        = f.submit 'Save changes', class: 'btn btn-primary'
+    .col-xl-4
+
+  .row.mt-4
+    .col-12
+      - @all_routes.each_with_index do |route, index|
+        .card 
+          .row.mx-1.my-2
+            .col-md-2
+              p.my-0
+                strong = "Ruta #{index + 1}"
+              p.small.my-0 = route.legible_assigned.gsub('/','|')
+            .col-md-10
+              .progress style="height: 100%;"
+                .progress-bar.bg-transparent role='progressbar' aria-label='Success example' aria-valuenow="#{route.starts_at_as_progress}" aria-valuemax='100' style="width: #{route.starts_at_as_progress}%"
+                . class="progress-bar#{route.vehicle.nil? ? '' : '-striped'} bg-success" role='progressbar' aria-label='Success example' aria-valuenow="#{route.ends_at_as_progress}" aria-valuemax='100' style="width: #{route.ends_at_as_progress}%"
+
+- else 
+  p.text-muted No routes found

@@ -1,31 +1,10 @@
-h3.mt-2 = @organization.name
-.row 
-  .col-xl-8
-    - unless @all_routes.empty?
-      = form_with(url: assign_route_scheduler_index_path(organization: @organization.name), method: 'post', class: 'form-inline mt-2' , data: { turbo: false}) do |f|
-        table.table.table-striped
-          thead.thead-dark
-            tr
-              th  Nombre 
-              th Hora 
-              th Tiempo
-              th #rutas
-              th Acción 
-              th Asignación
-          tbody 
-            - @all_routes.each_with_index do |route, index|
-              tr
-                th = "Ruta #{index + 1}"
-                td = route.compact_route_time
-                td = route.compact_travel_time
-                td = route.total_stops
-                td = route.action
-                - if route.vehicle.nil?
-                  td = f.select "#{index}-driver}", @all_drivers
-                - else
-                  td = route.legible_assigned
-        = f.submit 'Save changes', class: 'btn btn-primary'
-                
-    - else 
-      p.text-muted No routes found
-  .col-xl-4
+
+= form_with(url: organization_routes_scheduler_index_path, method: 'get', class: 'form-inline mt-2' , data: { turbo: false}) do |f|
+  = f.label 'Select an organization' , for: :organization
+  .row.form-group.mb-2
+    .col-sm-6
+      = f.select :organization, @user_organizations ,{}, { class: 'form-control' }
+    .col-sm-2
+      = f.submit 'Search', class: 'btn btn-primary'
+
+p.text-muted User has #{@user_organizations.count} organizations to select

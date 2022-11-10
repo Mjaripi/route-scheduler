@@ -3,17 +3,16 @@ Rails.application.routes.draw do
   devise_for :users
   
   namespace :user do
-    root :to => "home#index"
+    root :to => "scheduler#index"
   end
-
-  resources :home, only: [:index]
   
   resources :scheduler, only: [:index] do
     collection do
+      get 'organization_routes', to: 'scheduler#organization_routes'
       post 'assign_route', to: 'scheduler#assign_route'
     end
   end
 
   # Defines the root path route ("/")
-  root 'home#index'
+  root 'scheduler#index'
 end
