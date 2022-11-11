@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   
   resources :scheduler do
     collection do
-      get 'organization_routes', to: 'scheduler#organization_routes'
-      post 'assign_route', to: 'scheduler#assign_route'
+      get '/organization_routes', to: 'scheduler#organization_routes'
+      post '/assign_route', to: 'scheduler#assign_route'
     end
   end
 
