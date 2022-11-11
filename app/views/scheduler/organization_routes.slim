@@ -2,25 +2,26 @@
 
 = render 'search_form', organizations: @user_organizations, user: current_user, selected: "#{@organization.blank? ? '' : @organization.name}" do
   p.text-muted = @message
-
   - unless params[:organization].blank?
     - unless @all_routes.blank?
       .row 
         .col-xl-8
-          table.table
-            thead.table-dark
-              tr.route.border-side-right.border-color-dark
-                th Name 
-                th Hour 
-                th Time
-                th #Routes
-                th Action 
-                th Assigned
-            tbody
-              - @all_routes.each_with_index do |route, index|
-                = render 'routes_details', route: route, index: index, colors: @colors do
-        .col-xl-4
-
+          = form_with url: assign_route_scheduler_index_path(organization: @organization), class: 'form-inline mt-2', data: { turbo: false } do |form|
+            table.table
+              thead.table-dark
+                tr.route.border-side-right.border-color-dark
+                  th Name
+                  th Hour
+                  th Time
+                  th #Routes
+                  th Action
+                  th Assigned
+              tbody
+                - @all_routes.each_with_index do |route, index|
+                  = render 'routes_details', route: route, index: index, form: form, colors: @colors do
+            = form.submit 'Save Asignations', class: 'btn btn-primary w-auto mb-2'
+        .col-xl-4.mt-2
+          = image_tag "fake_map.png", data: {title: "map" }, class: "img-fluid"
       .row 
         .col-12.my-4
           .card.rounded-0 
@@ -29,6 +30,7 @@
                 p.small.text-muted.my-0 schedule
               .col-md-10.border-start
                 .progress.rounded-0 style="height: 100%;"
-                  .progress-bar.bg-transparent.text-muted
+                  - (0..@max_hours-1).each do|n|
+                    . class="progress-bar bg-transparent #{n == 0 ? '' : 'border-start'} border-secondary text-muted" style="width: #{100 / @max_hours}%" #{9+n}
           - @all_routes.each_with_index do |route, index|
             = render 'routes_schedules', route: route, index: index, colors: @colors do

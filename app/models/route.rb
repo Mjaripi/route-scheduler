@@ -2,8 +2,6 @@
 
 # Model for Route
 class Route < ApplicationRecord
-  after_update_commit { broadcast_replace "routes" }
-
   belongs_to :organization
   belongs_to :vehicle, required: false
 

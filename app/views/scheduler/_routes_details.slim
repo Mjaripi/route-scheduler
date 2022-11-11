@@ -1,13 +1,12 @@
 - frame_id = dom_id(route, "#{index}_turbo_detail")
 = turbo_frame_tag frame_id, class: "contents" do
-  = form_with url: assign_route_scheduler_index_path, class: 'form-inline mt-2' do |form|
-    tr class="route border-side-right border-color-#{colors[index]}"
-      th = "Ruta #{index + 1}"
-      td = route.compact_route_time
-      td = route.compact_travel_time
-      td = route.total_stops
-      td = route.action
-      td = form.select "route-#{index}", 
-            @organization.drivers.enabled_drivers(route).map { |d| d.assigned_vehicle },
-            { selected: route.legible_assigned, include_blank: 'Unassigned' }, 
-            { class: "form-select-sm route select-input select-color-#{route.vehicle.nil? ? 'grey' : colors[index]} w-auto" }
+  tr class="route border-side-right border-color-#{colors[index]}"
+    th = "Ruta #{index + 1}"
+    td = route.compact_route_time
+    td = route.compact_travel_time
+    td = route.total_stops
+    td = route.action
+    td = form.select "route-#{index}", 
+          @organization.drivers.enabled_drivers(route).map { |d| d.assigned_vehicle },
+          { selected: route.legible_assigned, include_blank: 'Unassigned' }, 
+          { class: "form-select-sm route select-input select-color-#{route.vehicle.nil? ? 'grey' : colors[index]} w-auto" }
