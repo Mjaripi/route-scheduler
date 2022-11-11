@@ -20,7 +20,7 @@ class Driver < ApplicationRecord
       unless check_route.vehicle.nil?
         enabled << driver && next if driver.vehicle.plate == check_route.vehicle.plate
       end
-      driver.vehicle.routes.reject{ |route| route.route_colision?(check_route) }.empty? ? next : enabled << driver
+      driver.vehicle.routes.select { |route| route.route_colision?(check_route) }.empty? ? enabled << driver : next
     end
     enabled
   }

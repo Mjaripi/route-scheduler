@@ -11,11 +11,9 @@ class SchedulerController < ApplicationController
     unless params[:organization].blank?
       @organization = Organization.find_by(name: params[:organization])
       unless @organization.blank?
-        @all_routes = Route.by_organization(@organization.name)
+        @all_routes = Route.order('starts_at ASC').by_organization(@organization.name)
         @message =  @all_routes.nil? ? "No routes found" : "#{@all_routes.count} routes were found"
-        @all_drivers = @organization.drivers.assigned.map { |d| d.assigned_vehicle }
-        @all_drivers.unshift("Unassigned")
-        @colors = %w[blue purple indigo pink red orange yellow green teal cyan]
+        @colors = %w[blue indigo red orange yellow green teal purple cyan pink]
       else
         @message = "The organization entered is not valid"
       end
