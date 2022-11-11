@@ -1,0 +1,13 @@
+
+h1 Search for #{Date.today.to_formatted_s(:long)}
+= form_with(url: organization_routes_scheduler_index_path, method: 'get', class: 'form-inline mt-2' , data: { turbo_frame: false}) do |f|
+  = turbo_frame_tag "search_organization_form" do
+    .row.mb-2
+      .col
+        .form-floating.w-auto
+          = f.select :organization, organizations ,{ selected: selected, include_blank: ''}, { class: 'form-select' }
+          = f.label 'Select an organization', for: :organization
+      .col
+        = f.submit 'Search', class: 'btn btn-primary w-auto', style: 'height: 100%;'
+p.text-muted = @message
+= yield
