@@ -1,11 +1,11 @@
-h3.mt-2 = @organization.name
+h1 = @organization.name
 - unless @all_routes.empty?
   .row 
     .col-xl-8
       = form_with(url: assign_route_scheduler_index_path(organization: @organization.name), method: 'post', class: 'form-inline mt-2' , data: { turbo: false}) do |f|
-        table.table.table-striped
-          thead.thead-dark
-            tr
+        table.table
+          thead.table-dark
+            tr.route.border-side-right.border-color-dark
               th Nombre 
               th Hora 
               th Tiempo
@@ -14,32 +14,36 @@ h3.mt-2 = @organization.name
               th Asignación
           tbody 
             - @all_routes.each_with_index do |route, index|
-              tr
+              tr class="route border-side-right border-color-#{@colors[index]}"
                 th = "Ruta #{index + 1}"
                 td = route.compact_route_time
                 td = route.compact_travel_time
                 td = route.total_stops
                 td = route.action
-                - if route.vehicle.nil?
-                  td = f.select "#{index}-driver}", @all_drivers
-                - else
-                  td = route.legible_assigned
+                td = f.select "route-#{index}", @organization.drivers.enabled_drivers(route).map { |d| d.assigned_vehicle },{ selected: route.legible_assigned, include_blank: 'Unassigned' }, { class: "form-select-sm route select-input select-color-#{route.vehicle.nil? ? 'grey' : @colors[index]} w-auto" }
+
         = f.submit 'Save changes', class: 'btn btn-primary'
     .col-xl-4
 
   .row.mt-4
     .col-12
+      .card.rounded-0 
+        .row.mx-1
+          .col-md-2
+          .col-md-10
+            .progress.rounded-0
+              .progress-bar
       - @all_routes.each_with_index do |route, index|
-        .card 
+        .card.rounded-0.border-top-0
           .row.mx-1.my-2
-            .col-md-2
+            . class="col-md-2 route border-side-left border-color-#{@colors[index]}"
               p.my-0
                 strong = "Ruta #{index + 1}"
               p.small.my-0 = route.legible_assigned.gsub('/','|')
-            .col-md-10
+            .col-md-10.border-start
               .progress style="height: 100%;"
-                .progress-bar.bg-transparent role='progressbar' aria-label='Success example' aria-valuenow="#{route.starts_at_as_progress}" aria-valuemax='100' style="width: #{route.starts_at_as_progress}%"
-                . class="progress-bar#{route.vehicle.nil? ? '' : '-striped'} bg-success" role='progressbar' aria-label='Success example' aria-valuenow="#{route.ends_at_as_progress}" aria-valuemax='100' style="width: #{route.ends_at_as_progress}%"
+                .progress-bar.bg-transparent role='progressbar' aria-label="pre-range-#{index}" aria-valuenow="#{route.starts_at_as_progress}" aria-valuemax='100' style="width: #{route.starts_at_as_progress}%"
+                . class="progress-bar#{route.vehicle.nil? ? '' : '-striped'} route progress-color-#{@colors[index]}" role='range-#{index}' aria-label='Success example' aria-valuenow="#{route.ends_at_as_progress}" aria-valuemax='100' style="width: #{route.ends_at_as_progress}%"
 
 - else 
   p.text-muted No routes found

@@ -38,4 +38,13 @@ class Route < ApplicationRecord
   def max_minutes = minutes_between_datetimes(min_datetime, max_datetime)
   def starts_at_as_progress = ( minutes_between_datetimes(min_datetime, starts_at.to_datetime) * 100 ) / max_minutes
   def ends_at_as_progress = (( minutes_between_datetimes(min_datetime, ends_at.to_datetime) * 100 ) / max_minutes ) - starts_at_as_progress
+
+  def route_colision?(route_to_check)
+    return true if starts_at <= route_to_check.starts_at && ends_at >= route_to_check.ends_at
+    return true if starts_at >= route_to_check.starts_at && ends_at <= route_to_check.ends_at
+    return true if starts_at <= route_to_check.starts_at && ends_at >= route_to_check.starts_at
+    return true if starts_at <= route_to_check.ends_at && ends_at >= route_to_check.ends_at
+
+    false
+  end
 end

@@ -8,7 +8,7 @@ class CreateRoutes < ActiveRecord::Migration[7.0]
       t.integer :total_stops
       t.string :action
 
-      t.references :organization, null: false, foreign_key: true
+      t.references :organization, null: false, index: true, foreign_key: true
       t.references :vehicle, foreign_key: true
 
       t.timestamps

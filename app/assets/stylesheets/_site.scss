@@ -1,0 +1,191 @@
+.route-layout {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+
+  main {
+    justify-content: center;
+
+    .route {
+      &.border-side {
+        border-top: 0;
+        border-bottom: 0;
+        &-left {
+          @extend .border-side;
+          border-left: solid;
+          border-right: 0;
+          border-width: .5rem;
+        }
+        &-right {
+          @extend .border-side;
+          border-right: solid;
+          border-left: 0;
+          border-width: .5rem;
+        }
+      }
+      &.select-input {
+        border-width: .15rem;
+        background-color: white;
+      }
+
+      &.select-color {
+        &-blue {
+          @extend .select-color;
+          border-color: var(--bs-blue);
+        }
+        &-purple {
+          @extend .select-color;
+          border-color: var(--bs-purple);
+        }
+        &-indigo {
+          @extend .select-color;
+          border-color: var(--bs-indigo);
+        }
+        &-pink {
+          @extend .select-color;
+          border-color: var(--bs-pink);
+        }
+        &-red {
+          @extend .select-color;
+          border-color: var(--bs-red);
+        }
+        &-orange {
+          @extend .select-color;
+          border-color: var(--bs-orange);
+        }
+        &-yellow {
+          @extend .select-color;
+          border-color: var(--bs-yellow);
+        }
+        &-green {
+          @extend .select-color;
+          border-color: var(--bs-green);
+        }
+        &-teal {
+          @extend .select-color;
+          border-color: var(--bs-teal);
+        }
+        &-cyan {
+          @extend .select-color;
+          border-color: var(--bs-cyan);
+        }
+        &-grey {
+          @extend .select-color;
+          border-color: var(--bs-gray);
+        }
+      }
+
+      &.border-color {
+        border-top-color: var(--bs-gray);
+        border-bottom-color: var(--bs-gray);
+
+        &-blue {
+          @extend .border-color;
+          border-right-color: var(--bs-blue);
+          border-left-color: var(--bs-blue);
+        }
+        &-purple {
+          @extend .border-color;
+          border-right-color: var(--bs-purple);
+          border-left-color: var(--bs-purple);
+        }
+        &-indigo {
+          @extend .border-color;
+          border-right-color: var(--bs-indigo);
+          border-left-color: var(--bs-indigo);
+        }
+        &-pink {
+          @extend .border-color;
+          border-right-color: var(--bs-pink);
+          border-left-color: var(--bs-pink);
+        }
+        &-red {
+          @extend .border-color;
+          border-right-color: var(--bs-red);
+          border-left-color: var(--bs-red);
+        }
+        &-orange {
+          @extend .border-color;
+          border-right-color: var(--bs-orange);
+          border-left-color: var(--bs-orange);
+        }
+        &-yellow {
+          @extend .border-color;
+          border-right-color: var(--bs-yellow);
+          border-left-color: var(--bs-yellow);
+        }
+        &-green {
+          @extend .border-color;
+          border-right-color: var(--bs-green);
+          border-left-color: var(--bs-green);
+        }
+        &-teal {
+          @extend .border-color;
+          border-right-color: var(--bs-teal);
+          border-left-color: var(--bs-teal);
+        }
+        &-cyan {
+          @extend .border-color;
+          border-right-color: var(--bs-cyan);
+          border-left-color: var(--bs-cyan);
+        }
+        &-grey {
+          @extend .border-color;
+          border-right-color: var(--bs-gray);
+          border-left-color: var(--bs-gray);
+        }
+        &-dark {
+          @extend .border-color;
+          border-right-color: var(--bs-dark);
+          border-left-color: var(--bs-dark);
+        }
+      }
+
+      &.progress-color{
+        height: 100%;
+
+        &-blue {
+          @extend .progress-color;
+          background-color: var(--bs-blue);
+        }
+        &-purple {
+          @extend .progress-color;
+          background-color: var(--bs-purple);
+        }
+        &-indigo {
+          @extend .progress-color;
+          background-color: var(--bs-indigo);
+        }
+        &-pink {
+          @extend .progress-color;
+          background-color: var(--bs-pink);
+        }
+        &-red {
+          @extend .progress-color;
+          background-color: var(--bs-red);
+        }
+        &-orange {
+          @extend .progress-color;
+          background-color: var(--bs-orange);
+        }
+        &-yellow {
+          @extend .progress-color;
+          background-color: var(--bs-yellow);
+        }
+        &-green {
+          @extend .progress-color;
+          background-color: var(--bs-green);
+        }
+        &-teal {
+          @extend .progress-color;
+          background-color: var(--bs-teal);
+        }
+        &-cyan {
+          @extend .progress-color;
+          background-color: var(--bs-cyan);
+        }
+      }
+        
+    }
+  }       
+}
