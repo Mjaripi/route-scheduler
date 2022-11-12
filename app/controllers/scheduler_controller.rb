@@ -26,8 +26,7 @@ class SchedulerController < ApplicationController
     unless params[:organization].blank?
       @organization = Organization.find_by(id: params[:organization])
       unless @organization.blank?
-        @all_routes = Kaminari.paginate_array(Route.order('starts_at ASC').by_organization(@organization.name))
-        @page_routes = Kaminari.paginate_array(Route.order('starts_at ASC').by_organization(@organization.name)).page(params[:page]).per(MAX_PAG)
+        @all_routes = Kaminari.paginate_array(Route.order('starts_at ASC').by_organization(@organization.name)).page(params[:page]).per(MAX_PAG)
         @message =  @all_routes.nil? ? "No routes found" : "#{@all_routes.count} routes were found"
         @colors = %w[blue indigo red orange yellow green teal purple cyan pink]
       else

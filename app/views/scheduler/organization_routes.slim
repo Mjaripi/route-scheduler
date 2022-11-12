@@ -15,10 +15,10 @@
                   th Action
                   th Assigned
               tbody
-                - @page_routes.each_with_index do |route, index|
+                - @all_routes.each_with_index do |route, index|
                   = render 'routes_details', route: route, index: index, form: form, colors: @colors do
             = form.submit 'Save Asignations', class: 'btn btn-primary w-auto mb-2'
-            = paginate @page_routes
+            = paginate @all_routes
         .col-xl-4.mt-2
           = image_tag "fake_map.png", data: {title: "map" }, class: "img-fluid"
       .row 
