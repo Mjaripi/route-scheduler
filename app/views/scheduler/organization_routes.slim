@@ -1,4 +1,4 @@
-= render 'search_form', organizations: @user_organizations, user: current_user, selected: "#{@organization.blank? ? '' : @organization.id}" do
+= render 'search_form', organizations: @user_organizations, user: current_user, selected_organization: "#{@organization.blank? ? '' : @organization.id}", selected_date: "#{ @selected_date.blank? ? '' : @selected_date }"  do
   p.my-0.text-muted = @message
   - unless params[:organization].blank?
     - unless @all_routes.blank?

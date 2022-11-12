@@ -9,4 +9,4 @@
       td = form.select "route-#{route.id}", 
             @organization.drivers.enabled_drivers(route).map { |d| d.assigned_vehicle },
             { selected: route.legible_assigned, include_blank: 'Unassigned' }, 
-            { class: "form-select-sm route select-input select-color-#{route.vehicle.nil? ? 'grey' : colors[index]} w-auto" }
+            { class: "d-block form-select-sm route select-input select-color-#{route.vehicle.nil? ? 'grey' : colors[index]}" }

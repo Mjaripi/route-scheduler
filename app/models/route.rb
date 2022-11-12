@@ -19,10 +19,11 @@ class Route < ApplicationRecord
   validates :action, inclusion: { in: VALID_ACTIONS }, on: :create
   validates :starts_at, comparison: { less_than: :ends_at }, on: :create
 
-  scope :by_start_at, -> (order: :asc) { order starts_at: order.to_sym }
-  scope :by_organization, -> (organization) { select { |r| r.organization.name == organization } }
-  scope :max_datetime, -> (date) { "#{date.to_date} #{MAX_TIME}".to_datetime }
-  scope :min_datetime, -> (date) { "#{date.to_date} #{MIN_TIME}".to_datetime }
+  scope :by_start_at, ->(order: :asc) { order starts_at: order.to_sym }
+  scope :by_organization, ->(organization) { select { |r| r.organization.name == organization } }
+  scope :by_date, ->(date) { select { |r| r.starts_at.to_date == date } }
+  scope :max_datetime, ->(date) { "#{date.to_date} #{MAX_TIME}".to_datetime }
+  scope :min_datetime, ->(date) { "#{date.to_date} #{MIN_TIME}".to_datetime }
 
   def compact_travel_time
     hours = travel_time / 60

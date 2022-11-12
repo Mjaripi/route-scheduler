@@ -1,14 +1,18 @@
 
 - frame_id = dom_id(user, "turbo_search")
 = turbo_frame_tag frame_id, class: "contents" do
-  h1 Search for #{Date.today.to_formatted_s(:long)}
+  h1 Search routes for
   = form_with url: organization_routes_scheduler_index_path, method: 'get', class: 'form-inline mt-2' do |f|
     
-    .row.mb-2
-      .col
-        .form-floating.w-auto
-          = f.collection_select :organization, organizations, :id, :name, { selected: selected, include_blank: ''}, { class: 'form-select' }
+    .row.d-flex.mb-2
+      .col-md-6
+        .form-floating
+          = f.collection_select :organization, organizations, :id, :name, { selected: selected_organization, include_blank: ''}, { class: 'form-select' }
           = f.label 'Select an organization', for: :organization
-      .col
-        = f.button 'Search', class: 'btn btn-primary w-auto', style: 'height: 100%;'
+        
+    .row.d-flex.mb-1.align-items-center.h-100
+      .col-md-4
+        = f.date_field :search_date, class: 'form-control mb-2', value: "#{ selected_date.blank? ? Date.today : selected_date }"
+      .col-md-2
+        = f.button 'Search', class: 'btn btn-primary form-control mb-2'
   =yield

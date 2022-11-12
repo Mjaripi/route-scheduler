@@ -14,13 +14,13 @@ html
   body.route-layout
     header
       nav.navbar.navbar-dark.bg-dark
-        .container-fluid.mt-2.mx-4
-          h2.navbar-brand Route Scheduler
+        .container-fluid.mx-4
+          h2.navbar-brand.my-2 Route Scheduler
           - if user_signed_in?
-            .d-flex
-              p.text-light = "#{current_user.email} ("
-              = link_to 'Logout', destroy_user_session_path, 'data-turbo-method': :delete
-              p.text-light = ")"
+            = form_with url: destroy_user_session_path, method: 'delete', class: 'form-inline my-2 my-lg-0', data: { turbo: false } do |form|
+              = form.label "#{current_user.email}", class: 'text-light'
+              = form.submit 'Logout', class: 'btn btn-outline-secondary mx-2'
+
     main.container.px-4.mt-4
       .row
         .col-12
