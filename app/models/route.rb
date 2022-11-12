@@ -12,7 +12,7 @@ class Route < ApplicationRecord
   attribute :total_stops, :integer
   attribute :action, :string
 
-  VALID_ACTIONS = %w[llegada recogida].freeze
+  VALID_ACTIONS = %w[arrival pickup].freeze
   MAX_TIME = '18:00:00 -0300'.freeze
   MIN_TIME = '09:00:00 -0300'.freeze
 
