@@ -4,7 +4,7 @@
     .row.mx-1.my-2
       . class="col-md-2 route border-side-left border-color-#{@colors[index]}"
         p.my-0
-          strong = "Ruta #{index + 1}"
+          strong = "Route #{route.id}"
         p.small.my-0 = route.legible_assigned.gsub('/','|')
       .col-md-10.border-start
         .progress style="height: 100%;"
