@@ -4,7 +4,7 @@
     - unless @all_routes.blank?
       .row 
         .col-xl-8
-          = form_with url: assign_route_scheduler_index_path(organization: @organization), class: 'form-inline mt-2', data: { turbo: false } do |form|
+          = form_with url: assign_route_scheduler_index_path(organization: @organization, selected_date: @selected_date), class: 'form-inline mt-2', data: { turbo: false } do |form|
             table.table
               thead.table-dark
                 tr.route.border-side-right.border-color-dark

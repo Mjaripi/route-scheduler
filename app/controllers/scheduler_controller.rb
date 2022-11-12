@@ -15,7 +15,7 @@ class SchedulerController < ApplicationController
         end
       end
     end
-    return redirect_to organization_routes_scheduler_index_path(organization: params[:organization])
+    return redirect_to organization_routes_scheduler_index_path(organization: params[:organization], selected_date: params[:selected_date])
   end
 
   def organization_routes
@@ -28,7 +28,7 @@ class SchedulerController < ApplicationController
     @message = 'The organization entered is not valid' unless @organization.blank?
     return if @organization.blank?
 
-    @selected_date = params[:search_date].to_date
+    @selected_date = params[:selected_date].to_date
     @all_routes = Kaminari.paginate_array(Route.order('starts_at ASC').by_organization(@organization.name).select { |r| r.starts_at.to_date == @selected_date }).page(params[:page]).per(MAX_PAG)
     @message =  @all_routes.nil? ? 'No routes found' : "#{@all_routes.count} routes were found"
     @colors = %w[blue indigo red orange yellow green teal purple cyan pink]

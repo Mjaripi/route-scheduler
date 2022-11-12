@@ -12,7 +12,7 @@
         
     .row.d-flex.mb-1.align-items-center.h-100
       .col-md-4
-        = f.date_field :search_date, class: 'form-control mb-2', value: "#{ selected_date.blank? ? Date.today : selected_date }"
+        = f.date_field :selected_date, class: 'form-control mb-2', value: "#{ selected_date.blank? ? Date.today : selected_date }"
       .col-md-2
         = f.button 'Search', class: 'btn btn-primary form-control mb-2'
   =yield
