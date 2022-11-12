@@ -2,7 +2,7 @@
 - frame_id = dom_id(user, "turbo_search")
 = turbo_frame_tag frame_id, class: "contents" do
   h1 Search for #{Date.today.to_formatted_s(:long)}
-  = form_with url: organization_routes_scheduler_index_path(organization: @organization), method: 'get', class: 'form-inline mt-2' do |f|
+  = form_with url: organization_routes_scheduler_index_path, method: 'get', class: 'form-inline mt-2' do |f|
     
     .row.mb-2
       .col
