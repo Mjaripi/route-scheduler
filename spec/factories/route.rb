@@ -5,11 +5,11 @@ FactoryBot.define do
     organization_id { Organization.all.sample.id }
     starts_at {
       DateTime.now > "#{Date.today} 18:00:00 -0300".to_datetime ?
-      Faker::Time.between(from: "#{Date.today+1} 09:00:00 -0300", to: "#{Date.today+1} 17:45:00 -0300").to_datetime :
-      Faker::Time.between(from: DateTime.now, to: "#{Date.today} 17:45:00 -0300").to_datetime
+      Faker::Time.between(from: "#{Date.today+1} 09:00:00 -0300".to_datetime, to: "#{Date.today+1} 17:45:00 -0300".to_datetime).to_datetime :
+      Faker::Time.between(from: DateTime.now, to: "#{Date.today} 17:45:00 -0300".to_datetime).to_datetime
     }
     ends_at {
-      Faker::Time.between(from: starts_at, to: "#{starts_at.to_date} 18:00:00 -0300").to_datetime
+      Faker::Time.between(from: starts_at.to_datetime, to: "#{starts_at.to_date} 18:00:00 -0300".to_datetime).to_datetime
     }
     travel_time { ( ends_at - starts_at ) * 24 * 60 }
     total_stops { 
@@ -18,7 +18,7 @@ FactoryBot.define do
       travel_time/times :
       travel_time/times + 1
     }
-    action { %w[llegada recogida].sample }
+    action { %w[arrival pickup].sample }
 
     trait :assigned do
       vehicle_id { Vehicle.assigned_by_organization(organization_id).sample.id }
