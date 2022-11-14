@@ -37,7 +37,7 @@ en:
   devise:
     failure:
         user:
-          unauthenticated: You have not logged in
+          unauthenticated: You are not logged in
     sessions:
       user:
         signed_in: Signed in successfully.
