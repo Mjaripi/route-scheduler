@@ -2,34 +2,40 @@ class SchedulerController < ApplicationController
   MAX_PAG = 6
 
   def assign_route
-    unless params[:organization].blank?
-      @organization = Organization.find_by(id: params[:organization])
-      unless @organization.blank?
-        changed_routes = []
-        conflict_routes = []
-        found_keys = params.keys.grep(/^route-/)
-        request_assignations = found_keys.map { |route| params[route] } unless found_keys.blank?
+    return if params[:organization].blank?
 
-        request_assignations.each_with_index do |request, index|
-          new_value = request.blank? ? nil : Vehicle.find_by(plate: request.split(' / ').last)
-          found_route = Route.find_by(id: found_keys[index].split('-').last)
-          next if found_route.vehicle_id == new_value
+    @organization = Organization.find_by(id: params[:organization])
+    return if @organization.blank?
 
-          if new_value.nil?
-            found_route.update(vehicle_id: new_value)
-            changed_routes << found_route
-            next
-          end
+    changed_routes = []
+    conflict_routes = []
+    found_keys = params.keys.grep(/^route-/)
+    request_assignations = found_keys.map { |route| params[route] } unless found_keys.blank?
 
-          if new_value.routes.select { |route| route.route_colision?(found_route) }.blank?
-            found_route.update(vehicle_id: new_value.id)
-            changed_routes << found_route
-          else
-            conflict_routes << found_route
-          end
-        end
+    request_assignations.each_with_index do |request, index|
+      new_value = request.blank? ? nil : Vehicle.find_by(plate: request.split(' / ').last)
+      found_route = Route.find_by(id: found_keys[index].split('-').last)
+
+      if new_value.nil?
+        next if found_route.vehicle_id == new_value
+      else
+        next if found_route.vehicle_id == new_value.id
+      end
+
+      if new_value.nil?
+        found_route.update(vehicle_id: new_value)
+        changed_routes << found_route
+        next
+      end
+
+      if new_value.routes.select { |route| route.route_colision?(found_route) }.blank?
+        found_route.update(vehicle_id: new_value.id)
+        changed_routes << found_route
+      else
+        conflict_routes << found_route
       end
     end
+
     flash[:alert] = t('scheduler.conflict_notices', count: conflict_routes.count) unless conflict_routes.blank?
     flash[:notice] = t('scheduler.notice_changes', count: changed_routes.empty? ? 0 : changed_routes.count)
     redirect_to organization_routes_scheduler_index_path(organization: params[:organization], selected_date: params[:selected_date])
