@@ -36,7 +36,7 @@ es-CL: &base
   devise:
     failure:
       user:
-        unauthenticated: Debe autentificarse para ingresar.
+        unauthenticated: Debe autenticarse para ingresar.
     sessions:
       user:
         signed_in: Ha iniciado sesión exitosamente.
