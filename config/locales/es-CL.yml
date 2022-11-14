@@ -1,0 +1,84 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   "true": "foo"
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+es-CL: &base
+  main:
+    app_name: Route Scheduler
+    logout: Cerrar sesión
+  devise:
+    sessions:
+      user:
+        signed_in: Ha iniciado sesión exitosamente.
+        signed_out: Ha cerrado su sesión exitosamente.
+      new:
+        title: Acceso
+        email: Correo electrónico
+        password: Contraseña
+        remember_me: Recuérdame
+        action: Iniciar Sesión
+  search:
+    browser_title: 'Buscar rutas para:'
+    browser_label: Seleccione una organización
+    browser_action: Buscar
+  scheduler:
+    organizations_found: 
+      zero: No tiene organizaciones para seleccionar
+      one: Tiene una organización para seleccionar
+      other: 'Tiene %{count} organizaciones para seleccionar'
+    organization_not_valid: 'La organización ingresada no es válida'
+    routes_found:
+      zero: No se encontraron rutas
+      one: Se encontró una ruta
+      other: 'Se encontraron %{count} rutas'
+    notice_changes:
+      zero: No se han realizado cambios
+      one: Una ruta fue actualizada
+      other: '%{count} rutas fueron actualizadas'
+    conflict_notices:
+      one: Una ruta no fue procesada por conflicto de horario
+      other: '%{count} rutas no fueron procesadas por conflicto de horario'
+    table:
+      name: Nombre
+      hour: Hora
+      time: Tiempo
+      num_routes: '#Rutas'
+      action: Acción
+      assigned: Assignación
+      pickup: Recogida
+      arrival: Llegada
+      save_action: Guardar Asignaciones
+      unassigned: Sin Asignar
+      route_name: 'Ruta %{name}'
+      glosary: Los conductores no podrán ser seleccionados en una ruta con tope de horario.
+    progress:
+      area_name: Horario
+      route_name: 'Ruta %{name}'
+      unassigned: Sin Asignar

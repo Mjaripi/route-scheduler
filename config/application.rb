@@ -16,6 +16,10 @@ module RouteScheduler
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
+    config.i18n.enforce_available_locales = false
+    config.i18n.available_locales = %i[es-CL]
+    config.i18n.default_locale = :'es-CL'
+    config.i18n.fallbacks = [:es]
     config.time_zone = 'America/Santiago'
     # config.eager_load_paths << Rails.root.join("extras")
   end

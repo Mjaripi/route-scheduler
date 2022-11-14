@@ -39,6 +39,7 @@ gem 'slim'
 gem 'slim-rails'
 
 gem 'devise'
+gem 'devise-i18n'
 gem 'kaminari'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]

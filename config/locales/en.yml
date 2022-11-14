@@ -31,3 +31,46 @@
 
 en:
   hello: "Hello world"
+  main:
+    app_name: Route Scheduler
+    logout: Logout
+  devise:
+    sessions:
+      user:
+        signed_in: Signed in successfully.
+        signed_out: Signed out successfully.
+  search:
+    browser_title: Search routes for
+    browser_label: Select an organization
+    browser_action: Search
+  scheduler:
+    organizations_found: 
+      zero: User has no organization to select
+      one: User has 1 organization to select
+      other: 'User has %{count} organizations to select'
+    organization_not_valid: 'The organization entered is not valid'
+    routes_found:
+      zero: No route were found
+      one: 1 route were found
+      other: '%{count} routes were found'
+    notice_changes:
+      zero: No changes were issued
+      one: 1 route was updated
+      other: '%{count} routes were updated'
+    table:
+      name: Name
+      hour: Hour
+      time: Time
+      num_routes: '#Routes'
+      action: Action
+      assigned: Assigned
+      pickup: Pickup
+      arrival: Arrival
+      save_action: Save Asignations
+      unassigned: Unassigned
+      route_name: 'Route %{name}'
+      glosary: Drivers with conflicting routes won't be selectable on the prompt.
+    progress:
+      area_name: schedule
+      route_name: 'Route %{name}'
+      unassigned: Unassigned

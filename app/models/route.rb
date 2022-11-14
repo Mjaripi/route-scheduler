@@ -40,7 +40,7 @@ class Route < ApplicationRecord
   def max_minutes = minutes_between_datetimes(min_datetime, max_datetime)
   def starts_at_as_progress = ( minutes_between_datetimes(min_datetime, starts_at.to_datetime) * 100 ) / max_minutes
   def ends_at_as_progress = (( minutes_between_datetimes(min_datetime, ends_at.to_datetime) * 100 ) / max_minutes ) - starts_at_as_progress
-
+  
   def route_colision?(route_to_check)
     return true if starts_at <= route_to_check.starts_at && ends_at >= route_to_check.ends_at
     return true if starts_at >= route_to_check.starts_at && ends_at <= route_to_check.ends_at
@@ -48,5 +48,16 @@ class Route < ApplicationRecord
     return true if starts_at <= route_to_check.ends_at && ends_at >= route_to_check.ends_at
 
     false
+  end
+
+  def conflicting_drivers
+    conflict = []
+    organization.drivers.assigned.each do |driver|
+      unless vehicle.nil?
+        next if driver.vehicle.plate == vehicle.plate
+      end
+      conflict << driver unless driver.vehicle.routes.select { |route| route.route_colision?(self) }.blank?
+    end
+    conflict
   end
 end

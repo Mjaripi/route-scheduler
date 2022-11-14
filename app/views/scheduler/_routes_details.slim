@@ -1,12 +1,12 @@
 - frame_id = dom_id(route, "#{index}_turbo_detail")
 = turbo_frame_tag frame_id, class: "contents" do
     tr class="route border-side-right border-color-#{colors[index]}"
-      th = "Route #{route.id}"
+      th = t("scheduler.table.route_name", name: route.id)
       td = route.compact_route_time
       td = route.compact_travel_time
       td = route.total_stops
-      td = route.action
+      td =  t("scheduler.table.#{route.action}")
       td = form.select "route-#{route.id}", 
-            @organization.drivers.enabled_drivers(route).map { |d| d.assigned_vehicle },
-            { selected: route.legible_assigned, include_blank: 'Unassigned' }, 
-            { class: "d-block form-select-sm route select-input select-color-#{route.vehicle.nil? ? 'grey' : colors[index]}" }
+                        @all_drivers,
+                        { selected: route.legible_assigned, include_blank: t('scheduler.table.unassigned'), disabled: route.conflicting_drivers.first.blank? ? [] : route.conflicting_drivers.map { |d| d.assigned_vehicle } }, 
+                        { class: "w-100 form-select-sm route select-input select-color-#{route.vehicle.nil? ? 'grey' : colors[index]}" }

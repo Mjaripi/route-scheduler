@@ -2,34 +2,37 @@
   p.my-0.text-muted = @message
   - unless params[:organization].blank?
     - unless @all_routes.blank?
-      .row 
+      .row.mt-2
         .col-xl-8
+          .card.text-dark.bg-warning
+            .card-body
+              p.my-0 = t('scheduler.table.glosary')
           = form_with url: assign_route_scheduler_index_path(organization: @organization, selected_date: @selected_date), class: 'form-inline mt-2', data: { turbo: false } do |form|
             table.table
               thead.table-dark
                 tr.route.border-side-right.border-color-dark
-                  th Name
-                  th Hour
-                  th Time
-                  th #Routes
-                  th Action
-                  th Assigned
+                  th = t('scheduler.table.name')
+                  th = t('scheduler.table.hour')
+                  th = t('scheduler.table.time')
+                  th = t('scheduler.table.num_routes')
+                  th = t('scheduler.table.action')
+                  th = t('scheduler.table.assigned')
               tbody
                 - @all_routes.each_with_index do |route, index|
                   = render 'routes_details', route: route, index: index, form: form, colors: @colors do
-            = form.submit 'Save Asignations', class: 'btn btn-primary w-auto mb-2'
+            = form.submit t('scheduler.table.save_action'), class: 'btn btn-primary w-auto mb-2'
             = paginate @all_routes
         .col-xl-4.mt-2
-          = image_tag "fake_map.png", data: {title: "map" }, class: "img-fluid"
+          = image_tag "fake_map.png", data: { title: "map" }, class: "img-fluid"
       .row 
         .col-12.my-4
           .card.rounded-0 
             .row.mx-1
               .col-md-2
-                p.small.text-muted.my-0 schedule
+                p.small.text-muted.my-0 = t('scheduler.progress.schedule') 
               .col-md-10.border-start
                 .progress.rounded-0 style="height: 100%;"
                   - (0..@max_hours-1).each do|n|
-                    . class="progress-bar bg-transparent #{n == 0 ? '' : 'border-start'} border-secondary text-muted" style="width: #{100 / @max_hours}%" #{9+n}
+                    . class="progress-bar bg-transparent #{ n == 0 ? '' : 'border-start' } border-secondary text-muted" style="width: #{100 / @max_hours}%" #{9+n}
           - @all_routes.each_with_index do |route, index|
             = render 'routes_schedules', route: route, index: index, colors: @colors do

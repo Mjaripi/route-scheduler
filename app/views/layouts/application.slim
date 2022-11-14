@@ -15,11 +15,11 @@ html
     header
       nav.navbar.navbar-dark.bg-dark
         .container-fluid.mx-4
-          h2.navbar-brand.my-2 Route Scheduler
+          h2.navbar-brand.my-2 = t('main.app_name')
           - if user_signed_in?
             = form_with url: destroy_user_session_path, method: 'delete', class: 'form-inline my-2 my-lg-0', data: { turbo: false } do |form|
               = form.label "#{current_user.email}", class: 'text-light'
-              = form.submit 'Logout', class: 'btn btn-outline-secondary mx-2'
+              = form.submit t('main.logout'), class: 'btn btn-outline-secondary mx-2'
 
     main.container.px-4.mt-4
       .row

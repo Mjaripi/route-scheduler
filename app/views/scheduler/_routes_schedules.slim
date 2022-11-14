@@ -1,12 +1,12 @@
 - frame_id = dom_id(route, "#{index}_turbo_schedule")
 = turbo_frame_tag frame_id, class: "contents" do
   .card.rounded-0.border-top-0
-    .row.mx-1.my-2
+    .row.align-items-center.mx-1.my-2
       . class="col-md-2 route border-side-left border-color-#{@colors[index]}"
         p.my-0
-          strong = "Route #{route.id}"
-        p.small.my-0 = route.legible_assigned.gsub('/','|')
+          strong = t("scheduler.progress.route_name", name: route.id) 
+        p.small.my-0 = route.vehicle.nil? ? t('scheduler.progress.unassigned') : route.legible_assigned.gsub('/','|')
       .col-md-10.border-start
-        .progress style="height: 100%;"
+        .progress style="height: 2rem;"
           .progress-bar.bg-transparent role='progressbar' aria-label="pre-range-#{index}" aria-valuenow="#{route.starts_at_as_progress}" aria-valuemax='100' style="width: #{route.starts_at_as_progress}%"
           . class="progress-bar#{route.vehicle.nil? ? '' : '-striped'} route progress-color-#{@colors[index]}" role='range-#{index}' aria-label='Success example' aria-valuenow="#{route.ends_at_as_progress}" aria-valuemax='100' style="width: #{route.ends_at_as_progress}%"
