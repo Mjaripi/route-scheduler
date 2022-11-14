@@ -35,6 +35,9 @@ en:
     app_name: Route Scheduler
     logout: Logout
   devise:
+    failure:
+        user:
+          unauthenticated: You have not logged in
     sessions:
       user:
         signed_in: Signed in successfully.

@@ -34,6 +34,9 @@ es-CL: &base
     app_name: Route Scheduler
     logout: Cerrar sesión
   devise:
+    failure:
+      user:
+        unauthenticated: Debe autentificarse para ingresar.
     sessions:
       user:
         signed_in: Ha iniciado sesión exitosamente.
