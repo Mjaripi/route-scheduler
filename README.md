@@ -17,6 +17,8 @@ Prepare the database
 * `rails db:migrate`
 * `rails db:seed`
 
+Note: Seed currently not configured.
+
 Finally, to start the application run:
 ```bash
 bin/dev
